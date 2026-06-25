@@ -34,7 +34,7 @@
         .logo { font-weight: 800; font-size: 1.4rem; text-transform: uppercase; text-decoration: none; color: var(--text-light); letter-spacing: 0.5px; display: flex; align-items: baseline; }
         .logo span { color: var(--liquid-red); font-size: 0.85rem; margin-left: 6px; letter-spacing: 1.5px; font-weight: 600; transition: var(--transition); }
         
-        /* Nav Header Button (Desktop default) */
+        /* Nav Header Button */
         .nav-cta { padding: 0.6rem 1.4rem; font-size: 0.85rem; box-shadow: none; }
         
         /* Hero Section */
@@ -120,7 +120,6 @@
             </div>
         </header>
 
-        <!-- Hero Section -->
         <section class="container hero-wrapper">
             <div class="hero-content">
                 <span class="badge">Premium Service & Hardware Node</span>
@@ -133,7 +132,6 @@
             </div>
         </section>
 
-        <!-- Services / Product Grid Feature -->
         <section id="explore" class="container showcase-section">
             <div class="grid-3">
                 <div class="card">
@@ -159,8 +157,13 @@
         </footer>
     </div>
 
-    <!-- Responsive Ambient Liquid Engine -->
     <script>
+        // Force browser to start from absolute top (0,0) position instantly on every refresh
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         const canvas = document.getElementById('liquid-canvas'); 
         const ctx = canvas.getContext('2d');
         
@@ -170,7 +173,6 @@
         function initCanvasDimensions() {
             width = canvas.width = window.innerWidth / 2; 
             height = canvas.height = window.innerHeight / 2;
-            // Check if user is viewing on a screen smaller than 768px (Mobile/Tablet breakpoint)
             isMobile = window.innerWidth <= 768;
         }
         
@@ -178,7 +180,6 @@
             constructor() { 
                 this.x = Math.random() * width; 
                 this.y = Math.random() * height; 
-                // Dynamic sizing: Small drops for mobile phones, larger ones for desktop screens
                 this.radius = isMobile ? (Math.random() * 20 + 40) : (Math.random() * 40 + 100); 
                 this.speedY = (Math.random() - 0.5) * 1.5; 
                 this.speedX = (Math.random() - 0.5) * 1.5; 
@@ -201,18 +202,15 @@
         }
 
         function createEngineNodes() {
-            // Drop count tuning: fewer drops on mobile screens to maintain clean proportions
             const nodeCount = isMobile ? 3 : 5;
             drops = Array.from({length: nodeCount}, () => new Drop());
         }
         
-        // Listen to window size changes to re-scale canvas metrics smoothly
         window.addEventListener('resize', () => { 
             initCanvasDimensions(); 
             createEngineNodes();
         });
         
-        // Initializer Execution
         initCanvasDimensions();
         createEngineNodes();
 
