@@ -34,12 +34,15 @@
         .logo { font-weight: 800; font-size: 1.4rem; text-transform: uppercase; text-decoration: none; color: var(--text-light); letter-spacing: 0.5px; }
         .logo span { color: var(--liquid-red); font-size: 0.85rem; margin-left: 6px; letter-spacing: 1.5px; font-weight: 600; }
         
-        /* Hero Section - Optimized Spacing */
+        /* Nav Header Button (Desktop default) */
+        .nav-cta { padding: 0.6rem 1.4rem; font-size: 0.85rem; box-shadow: none; }
+        
+        /* Hero Section */
         .hero-wrapper { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 8rem 0 4rem; max-width: 950px; margin: 0 auto; }
         .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(227, 0, 34, 0.1); border: 1px solid rgba(227, 0, 34, 0.3); color: var(--liquid-red-hover); padding: 0.5rem 1.4rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2rem; letter-spacing: 1px; }
         .badge::before { content: ''; width: 6px; height: 6px; background: var(--liquid-red); border-radius: 50%; }
         
-        /* Fluid Responsive Hero Typography */
+        /* Typography */
         .hero-content h1 { font-size: calc(2rem + 2vw); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; color: var(--text-light); letter-spacing: -1px; word-wrap: break-word; }
         .hero-content p { color: #b0b0b0; font-size: calc(0.95rem + 0.3vw); line-height: 1.7; margin-bottom: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto; }
         
@@ -67,17 +70,25 @@
         /* --- Mobile-First Media Optimization Queries --- */
         @media (max-width: 768px) { 
             .navbar { padding: 1rem 0; }
-            .logo { font-size: 1.2rem; }
-            .logo span { display: none; } /* Hide sub-text logo on very small headers for clarity */
+            .logo { font-size: 1.1rem; }
+            .logo span { display: none; }
+            
+            /* Compact Header Support button overrides */
+            .navbar .nav-cta {
+                padding: 0.45rem 0.9rem !important; 
+                font-size: 0.75rem !important;
+                max-width: 130px;
+                text-align: center;
+                border-radius: 30px;
+            }
             
             .hero-wrapper { padding: 4rem 0 2.5rem; }
             .badge { margin-bottom: 1.2rem; padding: 0.4rem 1.1rem; font-size: 0.7rem; }
             
-            /* Clean structural font sizing overrides for mobile phone boundaries */
             .hero-content h1 { font-size: 2.1rem; line-height: 1.25; margin-bottom: 1rem; letter-spacing: -0.5px; }
             .hero-content p { font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem; padding: 0 5px; }
             
-            /* Stacked ergonomic primary touchscreen buttons */
+            /* Structural stack for central main buttons */
             .btn-group { flex-direction: column; width: 100%; max-width: 280px; margin: 0 auto; gap: 0.8rem; }
             .btn-primary, .btn-secondary { display: block; text-align: center; width: 100%; padding: 0.9rem 1.5rem; font-size: 0.85rem; }
             
@@ -94,7 +105,7 @@
         <header>
             <div class="container navbar">
                 <a href="#" class="logo">Baba<span>Customer Service</span></a>
-                <a href="https://wa.me/xxxxxxx" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem; box-shadow: none;">Contact Support</a>
+                <a href="https://wa.me/xxxxxxx" class="btn-primary nav-cta">Contact Support</a>
             </div>
         </header>
 
@@ -105,7 +116,7 @@
                 <p>Welcome to Baba Customer Service, a reliable provider of top-tier mobile accessories and digital administrative utilities. We deliver efficient, walk-in technical services, ranging from custom hardware setups to secure institutional micro-transfers.</p>
                 <div class="btn-group">
                     <a href="#explore" class="btn-primary">View Core Offerings</a>
-                    <a href="#location" class="btn-secondary" onclick="alert('Visit us at Shop No#03, Charsadda Rd, Peshawar!'); return false;">Find Our Shop</a>
+                    <a href="#location" class="btn-secondary" onclick="alert('Visit us at Shop No#03, Charsadda Rd, Ashrafia Colony, Peshawar!'); return false;">Find Our Shop</a>
                 </div>
             </div>
         </section>
@@ -151,15 +162,12 @@
                 this.x = Math.random() * width; 
                 this.y = Math.random() * height; 
                 this.radius = Math.random() * 40 + 100; 
-                // Extreme step intervals for high speed fluid shifts
                 this.speedY = (Math.random() - 0.5) * 1.85; 
                 this.speedX = (Math.random() - 0.5) * 1.85; 
             }
             update() { 
                 this.y += this.speedY; 
                 this.x += this.speedX; 
-                
-                // Hyper kinetic walls
                 if (this.x > width || this.x < 0) this.speedX *= -1; 
                 if (this.y > height || this.y < 0) this.speedY *= -1; 
             }
