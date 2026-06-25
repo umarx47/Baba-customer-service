@@ -3,315 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baba Customer Service - Mobile Shop</title>
+    <title>Baba Customer Service | Premium Mobile & Digital Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-dark: #0a0a0a;
+            --liquid-red: #e30022;
+            --liquid-red-hover: #ff1a40;
+            --liquid-red-glow: rgba(227, 0, 34, 0.35);
+            --text-light: #ffffff;
+            --text-muted: #e0e0e0;
+            --glass-bg: #121212;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header h1 {
-            font-size: 28px;
-        }
-
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #ff6b6b;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* Services */
-        .services {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 50px;
-            color: #333;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
-
-        .service-card h3 {
-            margin-bottom: 15px;
-            color: #667eea;
-        }
-
-        /* Products */
-        .products {
-            padding: 80px 0;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-info h3 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .price {
-            color: #667eea;
-            font-size: 24px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        /* Contact */
-        .contact {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-
-        .contact-info {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-item {
-            margin: 20px 0;
-            font-size: 18px;
-        }
-
-        .contact-item strong {
-            color: #667eea;
-        }
-
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background-color: var(--bg-dark); color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+        
+        /* Background Ambient Glow */
+        .liquid-bg-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; opacity: 0.45; }
+        #liquid-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; filter: blur(60px); }
+        
+        .page-content-wrapper { position: relative; z-index: 2; display: flex; flex-direction: column; min-height: 100vh; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        
+        /* Header & Navigation */
+        header { background-color: rgba(10, 10, 10, 0.95); border-bottom: 1px solid rgba(227, 0, 34, 0.15); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
+        .logo { font-weight: 800; font-size: 1.4rem; text-transform: uppercase; text-decoration: none; color: var(--text-light); letter-spacing: 0.5px; }
+        .logo span { color: var(--liquid-red); font-size: 0.85rem; margin-left: 6px; letter-spacing: 1.5px; font-weight: 600; }
+        
+        /* Hero Section - Optimized Spacing */
+        .hero-wrapper { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 8rem 0 4rem; max-width: 950px; margin: 0 auto; }
+        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(227, 0, 34, 0.1); border: 1px solid rgba(227, 0, 34, 0.3); color: var(--liquid-red-hover); padding: 0.5rem 1.4rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2rem; letter-spacing: 1px; }
+        .badge::before { content: ''; width: 6px; height: 6px; background: var(--liquid-red); border-radius: 50%; }
+        
+        /* Fluid Responsive Hero Typography */
+        .hero-content h1 { font-size: calc(2rem + 2vw); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; color: var(--text-light); letter-spacing: -1px; word-wrap: break-word; }
+        .hero-content p { color: #b0b0b0; font-size: calc(0.95rem + 0.3vw); line-height: 1.7; margin-bottom: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+        
+        /* Buttons Setup */
+        .btn-group { display: flex; gap: 1.5rem; justify-content: center; }
+        .btn-primary { background-color: var(--liquid-red); color: var(--text-light); padding: 1rem 2.4rem; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: var(--transition); box-shadow: 0 4px 15px rgba(227, 0, 34, 0.3); font-size: 0.9rem; white-space: nowrap; }
+        .btn-primary:hover { transform: translateY(-2px); background-color: var(--liquid-red-hover); box-shadow: 0 0 30px rgba(255, 26, 64, 0.6); }
+        .btn-secondary { background-color: transparent; color: var(--text-light); padding: 1rem 2.4rem; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: var(--transition); font-size: 0.9rem; white-space: nowrap; }
+        .btn-secondary:hover { border-color: var(--liquid-red-hover); background-color: rgba(227, 0, 34, 0.05); box-shadow: 0 0 25px rgba(255, 26, 64, 0.2); transform: translateY(-2px); }
+        
+        /* Showcase Grid Section */
+        .showcase-section { padding: 4rem 0 8rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: var(--glass-bg); border: 1px solid rgba(255, 255, 255, 0.03); padding: 2.5rem 2rem; border-radius: 20px; transition: var(--transition); position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(227, 0, 34, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(227, 0, 34, 0.15); }
+        .card-icon { width: 55px; height: 55px; background: rgba(227, 0, 34, 0.05); border: 1px solid rgba(227, 0, 34, 0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--liquid-red-hover); font-size: 1.3rem; margin-bottom: 1.5rem; transition: var(--transition); }
+        .card:hover .card-icon { background: var(--liquid-red); color: var(--text-light); border-color: var(--liquid-red); box-shadow: 0 0 15px rgba(227, 0, 34, 0.4); }
+        .card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--text-light); font-weight: 700; }
+        .card p { font-size: 0.95rem; line-height: 1.6; color: #a0a0a0; }
+        
         /* Footer */
-        .footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-
-        @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 32px;
-            }
-            .hero p {
-                font-size: 16px;
-            }
-            .section-title {
-                font-size: 28px;
-            }
+        footer { background-color: #050505; padding: 3rem 0; border-top: 1px solid rgba(227, 0, 34, 0.1); text-align: center; margin-top: auto; font-size: 0.9rem; }
+        footer p { color: #666; }
+        
+        /* --- Mobile-First Media Optimization Queries --- */
+        @media (max-width: 768px) { 
+            .navbar { padding: 1rem 0; }
+            .logo { font-size: 1.2rem; }
+            .logo span { display: none; } /* Hide sub-text logo on very small headers for clarity */
+            
+            .hero-wrapper { padding: 4rem 0 2.5rem; }
+            .badge { margin-bottom: 1.2rem; padding: 0.4rem 1.1rem; font-size: 0.7rem; }
+            
+            /* Clean structural font sizing overrides for mobile phone boundaries */
+            .hero-content h1 { font-size: 2.1rem; line-height: 1.25; margin-bottom: 1rem; letter-spacing: -0.5px; }
+            .hero-content p { font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem; padding: 0 5px; }
+            
+            /* Stacked ergonomic primary touchscreen buttons */
+            .btn-group { flex-direction: column; width: 100%; max-width: 280px; margin: 0 auto; gap: 0.8rem; }
+            .btn-primary, .btn-secondary { display: block; text-align: center; width: 100%; padding: 0.9rem 1.5rem; font-size: 0.85rem; }
+            
+            .showcase-section { padding: 2rem 0 5rem; }
+            .grid-3 { grid-template-columns: 1fr; gap: 1.25rem; }
+            .card { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
 <body>
+    <div class="liquid-bg-container"><canvas id="liquid-canvas"></canvas></div>
+    
+    <div class="page-content-wrapper">
+        <header>
+            <div class="container navbar">
+                <a href="#" class="logo">Baba<span>Customer Service</span></a>
+                <a href="https://wa.me/xxxxxxx" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.75rem; box-shadow: none;">Contact Support</a>
+            </div>
+        </header>
 
-    <!-- Header -->
-    <div class="header">
-        <div class="container">
-            <h1>📱 Baba Customer Service</h1>
-            <p>Your Trusted Mobile Shop</p>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="container">
-            <h2>Welcome to Baba Customer Service</h2>
-            <p>Premium Mobile Phones & Repair Services</p>
-            <a href="#contact" class="btn">Contact Us Today</a>
-        </div>
-    </div>
-
-    <!-- Services -->
-    <div class="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <h3>Mobile Repair</h3>
-                    <p>Expert repair for all brands. Screen, battery, and water damage repair.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <h3>New & Used Phones</h3>
-                    <p>Latest models at competitive prices with warranty.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔄</div>
-                    <h3>Data Recovery</h3>
-                    <p>Recover lost photos, contacts, and important data.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎮</div>
-                    <h3>Accessories</h3>
-                    <p>Cases, chargers, headphones, and more.</p>
+        <section class="container hero-wrapper">
+            <div class="hero-content">
+                <span class="badge">Premium Service & Hardware Node</span>
+                <h1>Your One-Stop Destination for Mobile Accessories & Digital Solutions</h1>
+                <p>Welcome to Baba Customer Service, a reliable provider of top-tier mobile accessories and digital administrative utilities. We deliver efficient, walk-in technical services, ranging from custom hardware setups to secure institutional micro-transfers.</p>
+                <div class="btn-group">
+                    <a href="#explore" class="btn-primary">View Core Offerings</a>
+                    <a href="#location" class="btn-secondary" onclick="alert('Visit us at Shop No#03, Charsadda Rd, Peshawar!'); return false;">Find Our Shop</a>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Products -->
-    <div class="products">
-        <div class="container">
-            <h2 class="section-title">Popular Phones</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-info">
-                        <h3>iPhone 15 Pro</h3>
-                        <div class="price">$999</div>
-                        <p>Latest Apple flagship with A17 chip</p>
-                    </div>
+        <section id="explore" class="container showcase-section">
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-plug"></i></div>
+                    <h3>Premium Mobile Hardware</h3>
+                    <p>Source high-grade peripherals, heavy-duty data cables, certified fast-charging adapters, and durable impact-resistant device protection items.</p>
                 </div>
-                <div class="product-card">
-                    <div class="product-info">
-                        <h3>Samsung Galaxy S24</h3>
-                        <div class="price">$899</div>
-                        <p>AI-powered Android experience</p>
-                    </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <h3>Secure Financial Loads</h3>
+                    <p>Execute immediate domestic remittance, secure transactional ledgers, and fast wallet deposits via fully authorized over-the-counter channels.</p>
                 </div>
-                <div class="product-card">
-                    <div class="product-info">
-                        <h3>Google Pixel 8</h3>
-                        <div class="price">$699</div>
-                        <p>Best camera smartphone</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-info">
-                        <h3>OnePlus 12</h3>
-                        <div class="price">$799</div>
-                        <p>Fast charging & smooth performance</p>
-                    </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-print"></i></div>
+                    <h3>Document Operations</h3>
+                    <p>Access high-definition photocopying, high-fidelity digital optical scanning, rapid documentation formatting, and professional CV compiling.</p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Baba Customer Service. All Rights Reserved. Operational Node Secured.</p>
+        </footer>
     </div>
 
-    <!-- Contact -->
-    <div class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <strong>📍 Address:</strong> Shop #123, Main Mobile Market, City Center
-                </div>
-                <div class="contact-item">
-                    <strong>📞 Phone:</strong> +92 123 4567890
-                </div>
-                <div class="contact-item">
-                    <strong>✉️ Email:</strong> info@babacustomerservice.com
-                </div>
-                <div class="contact-item">
-                    <strong>⏰ Hours:</strong> Mon-Sat: 10am - 9pm | Sunday: Closed
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <div class="container">
-            <p>&copy; 2026 Baba Customer Service. All rights reserved.</p>
-        </div>
-    </div>
-
+    <script>
+        const canvas = document.getElementById('liquid-canvas'); 
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth / 2; 
+        let height = canvas.height = window.innerHeight / 2;
+        
+        window.addEventListener('resize', () => { 
+            width = canvas.width = window.innerWidth / 2; 
+            height = canvas.height = window.innerHeight / 2; 
+        });
+        
+        class Drop {
+            constructor() { 
+                this.x = Math.random() * width; 
+                this.y = Math.random() * height; 
+                this.radius = Math.random() * 40 + 100; 
+                // Extreme step intervals for high speed fluid shifts
+                this.speedY = (Math.random() - 0.5) * 1.85; 
+                this.speedX = (Math.random() - 0.5) * 1.85; 
+            }
+            update() { 
+                this.y += this.speedY; 
+                this.x += this.speedX; 
+                
+                // Hyper kinetic walls
+                if (this.x > width || this.x < 0) this.speedX *= -1; 
+                if (this.y > height || this.y < 0) this.speedY *= -1; 
+            }
+            draw() { 
+                let g = ctx.createRadialGradient(this.x, this.y, this.radius * 0.05, this.x, this.y, this.radius * 1.8); 
+                g.addColorStop(0, 'rgba(227, 0, 34, 0.8)'); 
+                g.addColorStop(1, 'rgba(10, 10, 10, 0)'); 
+                ctx.fillStyle = g; 
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, this.radius * 1.8, 0, Math.PI * 2); 
+                ctx.fill(); 
+            }
+        }
+        
+        const drops = Array.from({length: 5}, () => new Drop());
+        function run() { 
+            ctx.clearRect(0, 0, width, height); 
+            drops.forEach(d => { d.update(); d.draw(); }); 
+            requestAnimationFrame(run); 
+        } 
+        run();
+    </script>
 </body>
 </html>
