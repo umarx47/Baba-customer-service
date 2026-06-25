@@ -71,7 +71,6 @@
         @media (max-width: 768px) { 
             .navbar { padding: 1rem 0; }
             
-            /* Change logo structure to a clean stacked format aligned perfectly on mobile */
             .logo { 
                 flex-direction: column; 
                 align-items: flex-start; 
@@ -79,7 +78,6 @@
                 line-height: 1;
             }
             
-            /* Align text perfectly beneath Baba matching its start edge */
             .logo span { 
                 font-size: 0.6rem !important; 
                 margin-left: 0px !important; 
@@ -88,7 +86,6 @@
                 font-weight: 600;
             }
             
-            /* Compact Header Support button overrides */
             .navbar .nav-cta {
                 padding: 0.45rem 0.8rem !important; 
                 font-size: 0.75rem !important;
@@ -103,7 +100,6 @@
             .hero-content h1 { font-size: 2.1rem; line-height: 1.25; margin-bottom: 1rem; letter-spacing: -0.5px; }
             .hero-content p { font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem; padding: 0 5px; }
             
-            /* Structural stack for central main buttons */
             .btn-group { flex-direction: column; width: 100%; max-width: 280px; margin: 0 auto; gap: 0.8rem; }
             .btn-primary, .btn-secondary { display: block; text-align: center; width: 100%; padding: 0.9rem 1.5rem; font-size: 0.85rem; }
             
@@ -124,6 +120,7 @@
             </div>
         </header>
 
+        <!-- Hero Section -->
         <section class="container hero-wrapper">
             <div class="hero-content">
                 <span class="badge">Premium Service & Hardware Node</span>
@@ -136,6 +133,7 @@
             </div>
         </section>
 
+        <!-- Services / Product Grid Feature -->
         <section id="explore" class="container showcase-section">
             <div class="grid-3">
                 <div class="card">
@@ -161,24 +159,29 @@
         </footer>
     </div>
 
+    <!-- Responsive Ambient Liquid Engine -->
     <script>
         const canvas = document.getElementById('liquid-canvas'); 
         const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth / 2; 
-        let height = canvas.height = window.innerHeight / 2;
         
-        window.addEventListener('resize', () => { 
+        let width, height, isMobile;
+        let drops = [];
+
+        function initCanvasDimensions() {
             width = canvas.width = window.innerWidth / 2; 
-            height = canvas.height = window.innerHeight / 2; 
-        });
+            height = canvas.height = window.innerHeight / 2;
+            // Check if user is viewing on a screen smaller than 768px (Mobile/Tablet breakpoint)
+            isMobile = window.innerWidth <= 768;
+        }
         
         class Drop {
             constructor() { 
                 this.x = Math.random() * width; 
                 this.y = Math.random() * height; 
-                this.radius = Math.random() * 40 + 100; 
-                this.speedY = (Math.random() - 0.5) * 1.85; 
-                this.speedX = (Math.random() - 0.5) * 1.85; 
+                // Dynamic sizing: Small drops for mobile phones, larger ones for desktop screens
+                this.radius = isMobile ? (Math.random() * 20 + 40) : (Math.random() * 40 + 100); 
+                this.speedY = (Math.random() - 0.5) * 1.5; 
+                this.speedX = (Math.random() - 0.5) * 1.5; 
             }
             update() { 
                 this.y += this.speedY; 
@@ -196,8 +199,23 @@
                 ctx.fill(); 
             }
         }
+
+        function createEngineNodes() {
+            // Drop count tuning: fewer drops on mobile screens to maintain clean proportions
+            const nodeCount = isMobile ? 3 : 5;
+            drops = Array.from({length: nodeCount}, () => new Drop());
+        }
         
-        const drops = Array.from({length: 5}, () => new Drop());
+        // Listen to window size changes to re-scale canvas metrics smoothly
+        window.addEventListener('resize', () => { 
+            initCanvasDimensions(); 
+            createEngineNodes();
+        });
+        
+        // Initializer Execution
+        initCanvasDimensions();
+        createEngineNodes();
+
         function run() { 
             ctx.clearRect(0, 0, width, height); 
             drops.forEach(d => { d.update(); d.draw(); }); 
